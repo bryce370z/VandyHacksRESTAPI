@@ -1,6 +1,6 @@
 function config(){
   this.serverIP = function(){
-    return return '165.227.116.43';
+    return '165.227.116.43';
   }
   this.dbUser = function(){
     return 'admin';
@@ -9,7 +9,7 @@ function config(){
     return 'SecureP@ssw0rd1';
   }
   this.dbName = function(){
-      return 'Ticket_System';
+      return 'tour_db';
   }
   this.port = function(){
       return '3000';
