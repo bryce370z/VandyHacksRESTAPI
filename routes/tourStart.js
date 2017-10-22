@@ -4,10 +4,10 @@ var router = express.Router();
 
 router.get('/:id', function(req,res){
   var connection = mysql.createConnection({
-  host     : '165.227.116.43',
-  user     : 'admin',
-  password : 'SecureP@ssw0rd1',
-  database : 'tour_db'
+    host     : cfg.serverIP(),
+    user     : cfg.dbUser(),
+    password : cfg.dbPass(),
+    database : cfg.dbName()
   });
 
   id = req.params.id;
