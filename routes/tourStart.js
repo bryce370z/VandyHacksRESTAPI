@@ -2,7 +2,7 @@ var express = require('express');
 var mysql   = require('mysql');
 var router = express.Router();
 
-router.get('/', function(req,res){
+router.get('/:id', function(req,res){
   var connection = mysql.createConnection({
   host     : '165.227.116.43',
   user     : 'admin',
@@ -10,11 +10,13 @@ router.get('/', function(req,res){
   database : 'tour_db'
   });
 
+  id = req.params.id;
+
   connection.connect();
 
-  connection.query("SELECT Tour_Info.Tour_Id, Tour_Info.Tour_Name,Tour_Info.Tour_Desc,Tour_Info.Date,Tour_Info.Rate, Tour_Loc.Pic FROM Tour_Info, Tour_Loc WHERE Tour_Info.Tour_id=Tour_Loc.Tour_id AND Tour_Loc.Order=1", function (error, results, fields) {
+  connection.query("SELECT Tour_Info.Date, Tour_Info.Rate, Tour_Info.Tour_Name, Tour_Info.Tour_Desc, Users.Username FROM Users, Tour_Info, Tours WHERE Tour_Info.Tour_Id = Tours.Tour_Id AND Tours.User_Id = Users.User_Id AND Tour_Info.Tour_Id = " + id, function (error, results, fields) {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8100');
     if(error == null){
-      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8100');
       res.send(results);
     }
     else{
